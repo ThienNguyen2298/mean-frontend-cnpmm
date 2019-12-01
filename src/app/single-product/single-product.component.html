@@ -1,0 +1,40 @@
+<div class="conatiner" *ngIf="product" style="min-height: 500px;">
+        <div class="product-img-container">
+            <img class="productImg" mat-card-image style="width: 100%; padding: 20px;" [src]="product.image[0]"
+                alt="Photo of a Shiba Inu">
+    
+        </div>
+        <div class="product-description">
+            <h2 style="font-weight: 400;"> {{product.name}}</h2>
+            <div class="rating-container">
+                <span>Star: 5.0</span>
+                <span class="rating">100 Rating</span>
+                <span class="sold">500 Sold</span>
+            </div>
+            <h2 style="font-weight: 400;"> {{product.price}} VNĐ</h2>
+            
+            <div>
+    
+                <mat-form-field>
+                    <mat-label>Size</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let food of foods" [value]="food.value">
+                            {{food.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+    
+            <div class="button-group">
+                <button mat-button mat-raised-button color="primary" class="buy-now-button space">BUY NOW
+                </button>
+    
+                <button mat-button mat-stroked-button color="primary" class="button">
+                    ADD TO CART
+                </button>
+            </div>
+    
+    
+        </div>
+    
+    </div>

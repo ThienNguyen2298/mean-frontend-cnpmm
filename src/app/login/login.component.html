@@ -1,0 +1,19 @@
+<form [formGroup]="loginForm"> 
+<div class="example-container">
+    <h2 style="font-weight: 100; text-align: center;">Đăng nhập</h2>
+   
+    <mat-form-field appearance="outline">
+      <mat-label>Tài khoản</mat-label>
+      <input matInput formControlName="username" placeholder="Nhập tài khoản">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Mật khẩu</mat-label>
+      <input matInput formControlName="password" type="password" placeholder="Nhập mật khẩu">
+    </mat-form-field>
+    <button mat-button mat-raised-button color="primary" class="buy-now-button space" (click)="login()">ĐĂNG NHẬP
+    </button>
+  
+   
+    
+  </div>
+</form>

@@ -1,0 +1,34 @@
+<app-slider></app-slider>
+<div class="products-container">
+    <div class="title">
+        Các sản phẩm
+        <button mat-button mat-raised-button color="primary" class="viewAllBtn">Xem tất cả</button>
+            
+    </div>
+    <div class="body">
+            
+        <mat-card class="example-card" *ngFor="let item of products" (click)="productHome(item._id)">
+            <div class="fab">
+                <mat-icon fontSet="material-icons-outlined">favorite_border</mat-icon>
+            </div>
+            <owl-carousel [options]="carouselOptions" [items]="item.image"
+                [carouselClasses]="['owl-theme', 'row', 'sliding']">
+                <div class="item" *ngFor="let image of item.image as Iterables; let i = index">
+                    <div class="thumbnail-image">
+                        <img [src]="image" class="productImg" mat-card-image />
+                    </div>
+                </div>
+            </owl-carousel>
+            <mat-card-content>
+                <h3 style="margin: 0; font-weight: normal;">{{item.name}}</h3>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 14px;">{{item.price}} VNĐ</span>
+                    <mat-icon fontSet="material-icons-outlined">shopping_cart</mat-icon>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+</div>
+

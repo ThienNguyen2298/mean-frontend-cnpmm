@@ -1,0 +1,37 @@
+<form [formGroup]="registerForm"> 
+    <div class="example-container">
+        <h2 style="font-weight: 100; text-align: center;">Đăng ký</h2>
+       
+        <mat-form-field appearance="outline">
+          <mat-label>Họ và tên</mat-label>
+          <input matInput formControlName="name" placeholder="Nhập họ và tên">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="Nhập email">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>SĐT</mat-label>
+            <input matInput formControlName="phoneNumber" placeholder="Nhập sđt">
+          </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Tài khoản</mat-label>
+            <input matInput formControlName="username" placeholder="Nhập tài khoản">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Mật khẩu</mat-label>
+            <input matInput type="password" formControlName="password" placeholder="Nhập mật khẩu">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Nhập lại mật khẩu</mat-label>
+            <input matInput type="password" formControlName="username" placeholder="Nhập lại mật khẩu">
+          </mat-form-field>
+        
+        <button mat-button mat-raised-button color="primary" class="buy-now-button space" (click)="login()">ĐĂNG KÝ
+        </button>
+      
+       
+        
+      </div>
+      
+</form>

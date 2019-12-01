@@ -1,0 +1,66 @@
+
+<mat-toolbar style="display: flex; justify-content: space-between;">
+        <span>{{productService.form.controls['id'].value?"Sửa sản phẩm":"Thêm sản phẩm"}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+      </mat-toolbar>
+      <form [formGroup]="productService.form" class="normal-form" (submit)="onSubmit()">
+        <mat-grid-list cols="2" rowHeight="300px">
+          <mat-grid-tile style="text-align: center;">
+            <div class="controles-container">
+              <input type="hidden" formControlName="id">
+              
+              <mat-form-field>
+                  <input formControlName="name" matInput placeholder="Tên sản phẩm*">
+                  <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+              
+              <mat-form-field>
+                <input formControlName="price" matInput placeholder="Giá*">
+                
+              </mat-form-field>
+              <mat-form-field>
+                <input formControlName="size" matInput placeholder="Size">
+                
+              </mat-form-field>
+              <mat-form-field>
+                  <input formControlName="amount" matInput placeholder="Số lượng">
+                </mat-form-field>
+                <mat-form-field>
+                    <select formControlName="gender" matNativeControl required>
+                        <option value="1">Nam</option>
+                        <option value="0">Nữ</option>
+                      </select>
+                    </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile style="text-align: center;">
+            <div class="controles-container">
+              <div class="add-bottom-padding">
+                  <div style="text-align: center">
+                          
+                        <div>
+                          <input type="file" name="image" (change)="selectImage($event)"/>
+                        </div>
+                        
+                      
+                    </div>    
+                
+                  <mat-form-field>
+                      <mat-label>Danh mục</mat-label>
+                      <mat-select formControlName="category">
+                        <mat-option *ngFor="let cate of categories" [value]="cate._id">
+                          {{cate.name}}
+                        </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+              </div>
+              
+              <div class="button-row">
+                <button mat-raised-button color="primary"  type="submit" >Save</button>&nbsp;
+                
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
