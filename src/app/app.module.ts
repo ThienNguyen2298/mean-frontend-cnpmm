@@ -13,10 +13,11 @@ import { SliderComponent } from './common/slider/slider.component';
 //home component
 import { HomeComponent } from './home/home.component';
 //single-product component
-import {SingleProductComponent} from './single-product/single-product.component';
+import { SingleProductComponent } from './single-product/single-product.component';
 //services
-import {ProductService} from './services/product.service';
-import {NotificationService} from './services/notification.service';
+import { ProductService } from './services/product.service';
+import { NotificationService } from './services/notification.service';
+import { AuthenticateService } from './services/authenticate.service';
 //material component
 import {
   MatAutocompleteModule,
@@ -91,41 +92,46 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     //material
     MatAutocompleteModule,
-     MatButtonModule,
-     MatButtonToggleModule,
-     MatCardModule,
-     MatCheckboxModule,
-     MatChipsModule,
-     MatDatepickerModule,
-     MatDialogModule,
-     MatExpansionModule,
-     MatGridListModule,
-     MatIconModule,
-     MatInputModule,
-     MatListModule,
-     MatMenuModule,
-     MatProgressBarModule,
-     MatProgressSpinnerModule,
-     MatRadioModule,
-     MatRippleModule,
-     MatSelectModule,
-     MatSidenavModule,
-     MatSlideToggleModule,
-     MatSliderModule,
-     MatSnackBarModule,
-     MatStepperModule,
-     MatTableModule,
-     MatTabsModule,
-     MatToolbarModule,
-     MatTooltipModule,
-     MatNativeDateModule,
-     MatTreeModule,
-  MatSortModule,
-  MatPaginatorModule,
-     OwlModule
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatSnackBarModule,
+    MatStepperModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatNativeDateModule,
+    MatTreeModule,
+    MatSortModule,
+    MatPaginatorModule,
+    OwlModule
   ],
-  providers: [ProductService, CategoryService,NotificationService],
+  providers: [
+    ProductService,
+    CategoryService,
+    NotificationService,
+    AuthenticateService
+  ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent,RegisterComponent,ProductActionComponent]
+  entryComponents: [LoginComponent, RegisterComponent, ProductActionComponent]
 })
 export class AppModule { }
