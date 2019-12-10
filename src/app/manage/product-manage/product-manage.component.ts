@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {Product} from '../../models/product.model';
+import { Product } from '../../models/product.model';
 import { from } from 'rxjs';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { ProductActionComponent } from './product-action/product-action.component';
 import { ProductService } from '../../services/product.service';
-import { NotificationService} from '../../services/notification.service';
+import { NotificationService } from '../../services/notification.service';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -18,26 +18,26 @@ export class ProductManageComponent implements OnInit {
   //
   products = new MatTableDataSource<Product>();
   searchKey;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  displayedColumns: string[] = ['name', 'price', 'size', 'amount', 'gender','image','category','actions'];
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  displayedColumns: string[] = ['name', 'price', 'size', 'amount', 'gender', 'image', 'category', 'actions'];
   //
-  
-  constructor(private dialog: MatDialog, private productService: ProductService, 
-    private notificationService:  NotificationService, private categoryService: CategoryService) { }
+
+  constructor(private dialog: MatDialog, private productService: ProductService,
+    private notificationService: NotificationService, private categoryService: CategoryService) { }
 
   ngOnInit() {
     this.getProducts();
     this.products.paginator = this.paginator;
   }
-  getProducts(){
+  getProducts() {
     this.productService
-    .getProducts()
-    .subscribe((data: any) => {
-      this.products = data.products;
-      console.log('Data requested.....');
-      console.log('Products',this.products);
-      
-    });
+      .getProducts()
+      .subscribe((data: any) => {
+        this.products = data.products;
+        console.log('Data requested.....');
+        console.log('Products', this.products);
+
+      });
   }
   onCreate() {
     this.productService.initializeFormGroup();
@@ -45,9 +45,9 @@ export class ProductManageComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "40%";
-    this.dialog.open(ProductActionComponent,dialogConfig);
+    this.dialog.open(ProductActionComponent, dialogConfig);
   }
-  onEdit(row){
+  onEdit(row) {
     //this.productService.populateForm(row);
     this.productService.form.get("id").setValue(row._id);
     this.productService.form.get("name").setValue(row.name);
@@ -62,14 +62,14 @@ export class ProductManageComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "40%";
-    this.dialog.open(ProductActionComponent,dialogConfig);
+    this.dialog.open(ProductActionComponent, dialogConfig);
   }
-  onDelete(id){
+  onDelete(id) {
     console.log("ID để xóa", id);
-    if(confirm('Bạn có chắc chắn xóa sản phẩm này ?')){
-    this.productService.deleteProduct(id);
-    this.notificationService.warn('Đã xóa thành công!');
+    if (confirm('Bạn có chắc chắn xóa sản phẩm này ?')) {
+      this.productService.deleteProduct(id);
+      this.notificationService.warn('Đã xóa thành công!');
     }
-    
+
   }
 }
