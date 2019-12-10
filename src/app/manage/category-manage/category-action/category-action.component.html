@@ -1,0 +1,26 @@
+<mat-toolbar style="display: flex; justify-content: space-between;">
+      
+        <span class="fill-remaining-space"></span>
+        <button class="btn-dialog-close" mat-stroked-button (click)="close()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+      <form [formGroup]="form" class="normal-form">
+        <mat-grid-list cols="1" rowHeight="300px">
+          <mat-grid-tile style="text-align: center;">
+            <div class="controles-container">
+              <mat-form-field>
+                  <input formControlName="name" matInput placeholder="Tên danh mục*">
+                  <mat-error>This field is mandatory.</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input formControlName="description" matInput placeholder="Mô tả*">
+                
+              </mat-form-field>   
+              <div class="button-row">
+                <button mat-raised-button color="primary" (click)="save()" type="submit" >Save</button>&nbsp;
+                
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+

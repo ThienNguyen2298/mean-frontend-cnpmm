@@ -57,6 +57,7 @@ images=[
 ];
 product: any;
 id: any;
+cart= <any>[];
   constructor( private route: ActivatedRoute, private productService: ProductService) {
     //this.productService.getSingleProduct(Number(this.route.snapshot.params.id)).subscribe(res => {
       //this.product = res;
@@ -68,7 +69,7 @@ id: any;
       console.log('Product',this.product);
       
     });
-    }
+  }
     
     
   
@@ -78,6 +79,23 @@ id: any;
        this.id = params.get("id");
       console.log(this.id);
     })
+  }
+  addCart(product){
+    console.log(product);
+    var item = {
+      id: product._id,
+      name: product.name,
+      description: product.category.description, 
+      price: product.price,
+      quantity: 1, 
+      image: product.image
+    }
+    this.cart.push(item);
+    console.log("gio hang", this.cart);
+    this.setLocalStorageItem(this.cart);
+  }
+  setLocalStorageItem(cart: any[]){
+    localStorage.setItem("carts",JSON.stringify(cart));
   }
 
 }

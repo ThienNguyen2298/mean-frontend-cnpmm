@@ -1,35 +1,32 @@
 <div class="conatiner" *ngIf="product" style="min-height: 500px;">
         <div class="product-img-container">
-            <img class="productImg" mat-card-image style="width: 100%; padding: 20px;" [src]="product.image[0]"
+            <img class="productImg" mat-card-image style="width: 70%; padding: 20px;" [src]="product.image[0]"
                 alt="Photo of a Shiba Inu">
     
         </div>
         <div class="product-description">
             <h2 style="font-weight: 400;"> {{product.name}}</h2>
             <div class="rating-container">
-                <span>Star: 5.0</span>
-                <span class="rating">100 Rating</span>
-                <span class="sold">500 Sold</span>
+                <h4>Category: </h4>{{product.category.name}}<br/>
+                <h4>Description:</h4>{{product.category.description}}
+                
             </div>
-            <h2 style="font-weight: 400;"> {{product.price}} VNĐ</h2>
+            <h4>Price:</h4>
+            <h2 style="font-weight: 200;"> {{product.price}} VNĐ</h2>
             
             <div>
     
-                <mat-form-field>
-                    <mat-label>Size</mat-label>
-                    <mat-select>
-                        <mat-option *ngFor="let food of foods" [value]="food.value">
-                            {{food.viewValue}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    
+                <mat-label>Size: {{product.size}}</mat-label>
+                
+               
             </div>
     
             <div class="button-group">
-                <button mat-button mat-raised-button color="primary" class="buy-now-button space">BUY NOW
+                <button mat-button mat-raised-button color="primary" [routerLink]="['/shopping-cart']" class="buy-now-button space">VIEW CART
                 </button>
     
-                <button mat-button mat-stroked-button color="primary" class="button">
+                <button (click)="addCart(product)" mat-button mat-stroked-button color="primary" class="button">
                     ADD TO CART
                 </button>
             </div>
