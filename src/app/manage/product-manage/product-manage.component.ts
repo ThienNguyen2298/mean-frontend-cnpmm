@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {Product} from '../../models/product.model';
+import { Product } from '../../models/product.model';
 import { from } from 'rxjs';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { FormGroup,  Validators, FormBuilder } from "@angular/forms";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { ProductActionComponent } from './product-action/product-action.component';
 import { ProductService } from '../../services/product.service';
-import { NotificationService} from '../../services/notification.service';
+import { NotificationService } from '../../services/notification.service';
 import { CategoryService } from 'src/app/services/category.service';
 
 
@@ -22,27 +22,28 @@ export class ProductManageComponent implements OnInit {
   productForm: FormGroup;
   addFlag: boolean;
   searchKey;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  displayedColumns: string[] = ['name', 'price', 'size', 'amount', 'gender','image','category','actions'];
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  displayedColumns: string[] = ['name', 'price', 'size', 'amount', 'gender', 'image', 'category', 'actions'];
   //
   
   constructor(private formBuilder: FormBuilder, private dialog: MatDialog, private productService: ProductService, 
     private notificationService:  NotificationService, private categoryService: CategoryService) { }
+
 
   ngOnInit() {
     this.getProducts();
     this.buildForm();
     this.products.paginator = this.paginator;
   }
-  getProducts(){
+  getProducts() {
     this.productService
-    .getProducts()
-    .subscribe((data: any) => {
-      this.products = data.products;
-      console.log('Data requested.....');
-      console.log('Products',this.products);
-      
-    });
+      .getProducts()
+      .subscribe((data: any) => {
+        this.products = data.products;
+        console.log('Data requested.....');
+        console.log('Products', this.products);
+
+      });
   }
   buildForm():void{
     this.productForm = this.formBuilder.group({
@@ -76,6 +77,7 @@ export class ProductManageComponent implements OnInit {
     });
   }
   onEdit(row): void{
+
     //this.productService.populateForm(row);
     
    console.log("row",row);
@@ -95,8 +97,9 @@ export class ProductManageComponent implements OnInit {
       this.productService.updateProduct(data, row._id).subscribe(_ => this.getProducts());
       
     });
+
   }
-  onDelete(id){
+  onDelete(id) {
     console.log("ID để xóa", id);
     
     this.productService.deleteProduct(id).subscribe(_ => this.getProducts());
@@ -104,5 +107,6 @@ export class ProductManageComponent implements OnInit {
       
     
     
+
   }
 }

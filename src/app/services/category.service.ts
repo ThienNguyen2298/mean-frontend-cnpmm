@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +7,13 @@ import {HttpClient} from '@angular/common/http';
 export class CategoryService {
   url = 'http://localhost:8001';
   constructor(private http: HttpClient) { }
-  getCategories(){
+  getCategories() {
     return this.http.get(`${this.url}/productcategories`);
   }
   getCategoryById(id) {
     return this.http.get(`${this.url}/productcategories/${id}`);
   }
-  addCategory(name, description){
+  addCategory(name, description) {
     const category = {
       name: name,description: description
     };
@@ -21,6 +21,7 @@ export class CategoryService {
   }
   updateCategory(id,name, description){
     
+
     const category = {
       name, description
     };
@@ -28,7 +29,7 @@ export class CategoryService {
     console.log("data service", category);
     return this.http.put(this.url+'/productcategories'+'/'+id, category);
   }
-  deleteCategory(id){
+  deleteCategory(id) {
     return this.http.delete(`${this.url}/productcategories/${id}`);
   }
 }
