@@ -32,4 +32,8 @@ export class LoginComponent implements OnInit {
   loginFacebook(token: any) {
     return this.authenticateServiceService.loginFacebook();
   }
+
+  loginGoogle(token: any) {
+    return this.authenticateServiceService.loginGoogle();
+  }
 }
