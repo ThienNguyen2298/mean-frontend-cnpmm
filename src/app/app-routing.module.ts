@@ -6,11 +6,13 @@ import { RegisterComponent } from './register/register.component';
 import { ManageComponent } from './manage/manage.component';
 import { ProductManageComponent } from './manage/product-manage/product-manage.component';
 import { CategoryManageComponent } from './manage/category-manage/category-manage.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
 { path: 'home', component: HomeComponent },
 { path: '', redirectTo: 'home', pathMatch: 'full' },
 { path: 'product/:id', component: SingleProductComponent},
+{ path: 'shopping-cart', component: ShoppingCartComponent},
 { path: '*', redirectTo: 'home', pathMatch: 'full' },
 { path: 'manage', component: ManageComponent, children: [
   {

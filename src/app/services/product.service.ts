@@ -54,9 +54,7 @@ export class ProductService {
     console.log("product add service",JSON.stringify(p));
     
     
-    return this.http.post(this.url + "/products",product).subscribe((res)=>{
-      console.log(res);
-    });
+    return this.http.post(this.url + "/products",product);
   }
   updateProduct(p, id){
     const product = {
@@ -70,15 +68,11 @@ export class ProductService {
     }
     console.log("ID service", id);
     console.log("Product update service", product);
-    return this.http.put(this.url+'/products'+'/'+id, product).subscribe((res)=>{
-      console.log(res);
-    });
+    return this.http.put(this.url+'/products'+'/'+id, product);
   }
   deleteProduct(id){
     console.log("ID service", id);
-    return this.http.delete(this.url+'/products/'+id).subscribe((res)=>{
-      console.log(res);
-    });
+    return this.http.delete(this.url+'/products/'+id);
   }
   populateForm(product) {
     this.form.setValue(product);

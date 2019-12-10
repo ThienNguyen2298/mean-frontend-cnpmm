@@ -1,14 +1,14 @@
 
 <mat-toolbar style="display: flex; justify-content: space-between;">
-        <span>{{productService.form.controls['id'].value?"Sửa sản phẩm":"Thêm sản phẩm"}}</span>
+      
         <span class="fill-remaining-space"></span>
-        <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
-      </mat-toolbar>
-      <form [formGroup]="productService.form" class="normal-form" (submit)="onSubmit()">
+        <button class="btn-dialog-close" mat-stroked-button (click)="close()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+      <form [formGroup]="form" class="normal-form">
         <mat-grid-list cols="2" rowHeight="300px">
           <mat-grid-tile style="text-align: center;">
             <div class="controles-container">
-              <input type="hidden" formControlName="id">
+              
               
               <mat-form-field>
                   <input formControlName="name" matInput placeholder="Tên sản phẩm*">
@@ -27,6 +27,7 @@
                   <input formControlName="amount" matInput placeholder="Số lượng">
                 </mat-form-field>
                 <mat-form-field>
+                  
                     <select formControlName="gender" matNativeControl required>
                         <option value="1">Nam</option>
                         <option value="0">Nữ</option>
@@ -37,6 +38,7 @@
           <mat-grid-tile style="text-align: center;">
             <div class="controles-container">
               <div class="add-bottom-padding">
+                <!--
                   <div style="text-align: center">
                           
                         <div>
@@ -45,19 +47,31 @@
                         
                       
                     </div>    
-                
+                  -->
+                  
+                  <img mat-card-image style="width: 100px; height: 100px;" [src]="urlImg" alt="Photo of a Shiba Inu">
+                  <br/>
                   <mat-form-field>
-                      <mat-label>Danh mục</mat-label>
-                      <mat-select formControlName="category">
-                        <mat-option *ngFor="let cate of categories" [value]="cate._id">
-                          {{cate.name}}
+                      
+                      <input (keyup)="onPressEnter($event)" formControlName="image" type="text" matInput placeholder="Đường dẫn ảnh">
+                      
+                  </mat-form-field>
+                  <mat-form-field>
+                      
+                      
+                      <mat-select formControlName="category" [compareWith]="compareObjects"
+                      >
+                        <mat-option *ngFor="let cate of categories" [value]="cate">
+                          
+                            {{cate.name}}
+                          
                         </mat-option>
                       </mat-select>
                   </mat-form-field>
               </div>
               
               <div class="button-row">
-                <button mat-raised-button color="primary"  type="submit" >Save</button>&nbsp;
+                <button mat-raised-button color="primary" (click)="save()" type="submit" >Save</button>&nbsp;
                 
               </div>
             </div>

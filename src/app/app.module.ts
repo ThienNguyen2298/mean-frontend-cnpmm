@@ -14,6 +14,7 @@ import { SliderComponent } from './common/slider/slider.component';
 import { HomeComponent } from './home/home.component';
 //single-product component
 import {SingleProductComponent} from './single-product/single-product.component';
+import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
 //services
 import {ProductService} from './services/product.service';
 import {NotificationService} from './services/notification.service';
@@ -65,6 +66,8 @@ import { ProductActionComponent } from './manage/product-manage/product-action/p
 import { CategoryService } from './services/category.service';
 //http
 import { HttpClientModule } from '@angular/common/http';
+import { CategoryActionComponent } from './manage/category-manage/category-action/category-action.component';
+
 
 @NgModule({
   declarations: [
@@ -80,7 +83,9 @@ import { HttpClientModule } from '@angular/common/http';
     ManageComponent,
     ProductManageComponent,
     CategoryManageComponent,
-    ProductActionComponent
+    ProductActionComponent,
+    CategoryActionComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
@@ -126,6 +131,6 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [ProductService, CategoryService,NotificationService],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent,RegisterComponent,ProductActionComponent]
+  entryComponents: [LoginComponent,RegisterComponent,ProductActionComponent, CategoryActionComponent]
 })
 export class AppModule { }
