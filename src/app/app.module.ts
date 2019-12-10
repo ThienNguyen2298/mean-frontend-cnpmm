@@ -20,6 +20,7 @@ import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
 import { ProductService } from './services/product.service';
 import { NotificationService } from './services/notification.service';
 import { AuthenticateService } from './services/authenticate.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 //material component
 import {
   MatAutocompleteModule,
@@ -135,7 +136,8 @@ import { CategoryActionComponent } from './manage/category-manage/category-actio
     ProductService,
     CategoryService,
     NotificationService,
-    AuthenticateService
+    AuthenticateService,
+    JwtHelperService
   ],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent,RegisterComponent,ProductActionComponent, CategoryActionComponent]

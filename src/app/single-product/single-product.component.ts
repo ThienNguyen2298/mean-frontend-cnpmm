@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute } from '@angular/router';
 import {ProductService} from '../services/product.service';
+import { NotificationService} from '../services/notification.service';
 import { from } from 'rxjs';
 
 @Component({
@@ -57,8 +58,9 @@ images=[
 ];
 product: any;
 id: any;
+
 cart= <any>[];
-  constructor( private route: ActivatedRoute, private productService: ProductService) {
+  constructor( private route: ActivatedRoute, private productService: ProductService, private notificationService:  NotificationService) {
     //this.productService.getSingleProduct(Number(this.route.snapshot.params.id)).subscribe(res => {
       //this.product = res;
     //});
@@ -78,24 +80,55 @@ cart= <any>[];
     this.route.paramMap.subscribe(params => {
        this.id = params.get("id");
       console.log(this.id);
-    })
+    });
+    this.InitCart();
+    
+  }
+  InitCart(){
+    if (window.localStorage)
+        this.cart = JSON.parse(window.localStorage.getItem("carts"));
+    if (!this.cart)
+        this.cart = [];
   }
   addCart(product){
-    console.log(product);
-    var item = {
-      id: product._id,
-      name: product.name,
-      description: product.category.description, 
-      price: product.price,
-      quantity: 1, 
-      image: product.image
+    
+    var flag = false;
+    
+    for (var i in this.cart) {
+     console.log("temcart ",this.cart[i]);
+     console.log("prodcut add", product);
+     if(this.cart[i].id === product._id)
+     {
+      this.cart[i].quantity = this.cart[i].quantity + 1;
+       console.log("co vô if này và quantity ", this.cart[i].quantity)
+       flag =true;
+     }
     }
-    this.cart.push(item);
-    console.log("gio hang", this.cart);
-    this.setLocalStorageItem(this.cart);
+    console.log("flag", flag);
+    console.log("cart sau khi add", this.cart);
+    if(flag == false){
+      var item = {
+        id: product._id,
+        name: product.name,
+        description: product.category.description, 
+        price: product.price,
+        quantity: 1, 
+        image: product.image
+      }
+      this.cart.push(item);
+      console.log("gio hang", this.cart);
+      this.setLocalStorageItem(this.cart);
+      this.notificationService.warn('Đã thêm giỏ hàng!');
+    }
+    else if(flag == true){
+      
+      this.setLocalStorageItem(this.cart);
+      this.notificationService.warn('Đã thêm giỏ hàng!');
+    }
   }
   setLocalStorageItem(cart: any[]){
     localStorage.setItem("carts",JSON.stringify(cart));
   }
+  
 
 }

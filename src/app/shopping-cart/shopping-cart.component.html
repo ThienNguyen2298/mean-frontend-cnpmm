@@ -40,9 +40,9 @@
                     {{item.price}}
             </div>
             <div class="quantity">
-                <mat-icon fontSet="material-icons-outlined" class="close-icon">remove</mat-icon>
+                <mat-icon fontSet="material-icons-outlined" (click)="" class="close-icon">remove</mat-icon>
                 <input style="height: 20px; margin-right: 5px; text-align: center;" type="text" size="1" value="{{item.quantity}}" />
-                <mat-icon fontSet="material-icons-outlined" class="close-icon">add</mat-icon>
+                <mat-icon fontSet="material-icons-outlined" (click)="" class="close-icon">add</mat-icon>
             </div>
             <div class="total">
                     {{item.quantity*item.price}}
@@ -60,27 +60,11 @@
             <h2>CART TOTALS</h2>
             <hr>
             <table style="width: 100%">
-                <tr>
-                    <td>Subtotal</td>
-                    <td>$20.60</td>
-                </tr>
-                <tr>
-                    <td>Delivery</td>
-                    <td>$0.60</td>
-                </tr>
-                <tr>
-                    <td>Discount</td>
-                    <td>$0.60</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <hr>
-                    </td>
-                </tr>
+                
                 <tr>
     
                     <td>Total</td>
-                    <td><b>$10.60</b></td>
+                    <td><b>{{Total}}</b></td>
                 </tr>
             </table>
             <div class="checkout-button">
