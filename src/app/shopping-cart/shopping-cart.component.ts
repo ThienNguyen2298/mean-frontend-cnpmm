@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { ConfirmOrderComponent } from '../confirm-order/confirm-order.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
+import { NotificationService } from '../services/notification.service';
+  import { from } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,7 +13,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 export class ShoppingCartComponent implements OnInit {
   cart: [];
   Total: any;
-  constructor(private productServices: ProductService, public dialog: MatDialog) {
+  checkout; any;
+  constructor(private productServices: ProductService, public dialog: MatDialog, private notificationService: NotificationService) {
 
   }
 
@@ -48,11 +51,19 @@ export class ShoppingCartComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "40%";
-    dialogConfig.data = this.Total;
+    //dialogConfig.width = "40%";
+    dialogConfig.data =  this.checkout = {total: this.Total, name:'Đinh Quang Nam', listItem: this.cart};
     const dialogRef = this.dialog.open(ConfirmOrderComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if(result!=null)
+      {
+        console.log('data sau khi confirm ', result);
+        this.notificationService.success("Đặt hàng thành công!!!");
+        localStorage.removeItem('carts');
+        this.Total = 0;
+        this.cart = this.getCart();
+      }
+      
     });
   }
 }
