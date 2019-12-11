@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AbstractControl, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticateService } from '../../app/services/authenticate.service';
 import { CookieService } from 'ngx-cookie-service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   loggedIn: boolean;
 
   loginForm: FormGroup;
-  constructor(private router: Router,
+  constructor(private dialogRef: MatDialogRef<LoginComponent>,
+    private router: Router,
     private authenticateService: AuthenticateService,
     private _router: Router,
     private cookieService: CookieService) {
@@ -32,11 +34,13 @@ export class LoginComponent implements OnInit {
     //   this.router.navigate(['adminProduct']);
     // });
 
-    this.authenticateService.signInWithFB();
+    //this.authenticateService.signInWithFB();
+    this.dialogRef.close(1);
   }
 
   loginGoogle() {
-    this.authenticateService.signInWithGoogle();
+    //this.authenticateService.signInWithGoogle();
+    this.dialogRef.close(2);
   }
 
   ngOnInit() {

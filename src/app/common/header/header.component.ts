@@ -39,6 +39,7 @@ export class HeaderComponent implements OnInit {
     this.authService.authState.subscribe(async (user) => {
       this.user = user;
       this.loggedIn = (user != null);
+      console.log("user: ",this.user);
 
       console.log(this.authenticateService.flagCookie)
       if (this.cookieService.get('token') || this.authenticateService.flagCookie == true) {
@@ -60,7 +61,17 @@ export class HeaderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log("kq", result);
+      if(result == 1){
+        console.log("Đã vô fb")
+        this.authenticateService.signInWithFB();
+      }
+      else if( result == 2){
+        this.authenticateService.signInWithGoogle();
+      }
+      else {
+        
+      }
     });
   }
   openRegisterDialog(): void {
@@ -69,7 +80,8 @@ export class HeaderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      //console.log('The dialog was closed');
+      
     });
   }
   logout() {
