@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthService } from "angularx-social-login";
 //common component
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
@@ -13,14 +14,20 @@ import { SliderComponent } from './common/slider/slider.component';
 //home component
 import { HomeComponent } from './home/home.component';
 //single-product component
-import {SingleProductComponent} from './single-product/single-product.component';
-import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
+import { SingleProductComponent } from './single-product/single-product.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 //services
 import { ProductService } from './services/product.service';
 import { NotificationService } from './services/notification.service';
 import { AuthenticateService } from './services/authenticate.service';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { GoogleLoginProvider } from 'angularx-social-login';
+import { FacebookLoginProvider } from 'angularx-social-login';
+import { AuthServiceConfig } from 'angularx-social-login';
+import { Http } from '@angular/http';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { CookieService } from 'ngx-cookie-service';
 //material component
 import {
   MatAutocompleteModule,
@@ -69,9 +76,35 @@ import { ProductActionComponent } from './manage/product-manage/product-action/p
 import { CategoryService } from './services/category.service';
 //http
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { CategoryActionComponent } from './manage/category-manage/category-action/category-action.component';
 import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
 
+
+export function getAuthHttp(http: Http) {
+  return new AuthHttp(new AuthConfig({
+    headerName: 'x-access-token',
+    noTokenScheme: true,
+    noJwtError: true,
+    globalHeaders: [{ 'Accept': 'application/json' }],
+    tokenGetter: (() => localStorage.getItem('id_token')),
+  }), http);
+}
+
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("1084076024067-tnjik6mst6ntkpij0dvhl5nfj9inuibq.apps.googleusercontent.com")
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('534209673828624')
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -93,6 +126,7 @@ import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
     ConfirmOrderComponent
   ],
   imports: [
+    HttpModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -135,14 +169,26 @@ import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
     OwlModule
   ],
   providers: [
+    CookieService,
+    AuthService,
     ProductService,
     CategoryService,
     NotificationService,
-    AuthenticateService
-    
+    AuthenticateService,
+    {
+      provide: AuthHttp,
+      useFactory: getAuthHttp,
+      deps: [Http]
+    },
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    },
+    JwtHelperService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent,RegisterComponent,ProductActionComponent, CategoryActionComponent, ConfirmOrderComponent]
+
 
 })
 export class AppModule { }
