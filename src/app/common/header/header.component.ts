@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../../login/login.component';
-import {RegisterComponent} from '../../register/register.component';
+import { RegisterComponent } from '../../register/register.component';
 import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
     this.sidenavEnable = !this.sidenavEnable;
   }
   openLoginDialog(): void {
-    const dialogRef = this.dialog.open(LoginComponent ,{
+    const dialogRef = this.dialog.open(LoginComponent, {
 
     });
 
@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
     });
   }
   openRegisterDialog(): void {
-    const dialogRef = this.dialog.open(RegisterComponent ,{
+    const dialogRef = this.dialog.open(RegisterComponent, {
 
     });
 
@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
     });
   }
   logout() {
-    
+
     this.router.navigate(['home']);
   }
 

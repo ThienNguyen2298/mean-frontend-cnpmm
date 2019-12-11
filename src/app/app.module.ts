@@ -70,6 +70,7 @@ import { CategoryService } from './services/category.service';
 //http
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryActionComponent } from './manage/category-manage/category-action/category-action.component';
+import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { CategoryActionComponent } from './manage/category-manage/category-actio
     CategoryManageComponent,
     ProductActionComponent,
     CategoryActionComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ConfirmOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -140,7 +142,7 @@ import { CategoryActionComponent } from './manage/category-manage/category-actio
     JwtHelperService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent,RegisterComponent,ProductActionComponent, CategoryActionComponent]
+  entryComponents: [LoginComponent,RegisterComponent,ProductActionComponent, CategoryActionComponent, ConfirmOrderComponent]
 
 })
 export class AppModule { }
