@@ -20,7 +20,7 @@ export class ConfirmOrderComponent implements OnInit {
     }
 
   ngOnInit() {
-    console.log(this.checkout.total);
+    console.log("checkout: ",this.checkout);
     this.createdDate = this.getCurrentDateTime();
     this.buildForm();
   }
@@ -30,7 +30,7 @@ export class ConfirmOrderComponent implements OnInit {
     this.confirmOrderForm = new FormGroup({
       total: new FormControl(this.checkout.total),
       createdDate: new FormControl(this.createdDate),
-      name: new FormControl(this.checkout.name)
+      name: new FormControl(this.checkout.name.name)
     });
     console.log(this.confirmOrderForm);
   }

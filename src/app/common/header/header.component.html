@@ -46,20 +46,18 @@
                     <mat-icon fontSet="material-icons-outlined">add_shopping_cart</mat-icon>
                 </li>
                 <li class="contain profile dropdown" *ngIf="user">
-                    <img src="https://img1a.flixcart.com/www/linchpin/fk-cp-zion/img/profile-pic-male_2fd3e8.svg"
-                        width="25px">
+                    <p>{{user.name}}</p>
 
                     <div class="dropdown-content">
                         <a [routerLink]="['/myprofile']">My Profile</a>
-                        <a>Orders</a>
-                        <a>Wishlist</a>
-                        <a>Notifications</a>
+                        
                         <a (click)="logout()">Logout</a>
                     </div>
                 </li>
                 <li class="contain" *ngIf="user" [routerLink]="['/shopping-cart']">
                     <mat-icon fontSet="material-icons-outlined">add_shopping_cart</mat-icon>
                 </li>
+                
             </ul>
         </div>
 

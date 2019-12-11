@@ -184,7 +184,7 @@ export function provideConfig() {
       provide: AuthServiceConfig,
       useFactory: provideConfig
     },
-    JwtHelperService,
+    JwtHelperService
   ],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent,RegisterComponent,ProductActionComponent, CategoryActionComponent, ConfirmOrderComponent]
