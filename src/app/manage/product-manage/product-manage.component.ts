@@ -104,8 +104,6 @@ export class ProductManageComponent implements OnInit {
     
     this.productService.deleteProduct(id).subscribe(_ => this.getProducts());
     this.notificationService.warn('Đã xóa thành công!');
-      
-    
     
 
   }

@@ -78,6 +78,7 @@ import { CategoryService } from './services/category.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { CategoryActionComponent } from './manage/category-manage/category-action/category-action.component';
+import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
 
 
 export function getAuthHttp(http: Http) {
@@ -121,7 +122,8 @@ export function provideConfig() {
     CategoryManageComponent,
     ProductActionComponent,
     CategoryActionComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ConfirmOrderComponent
   ],
   imports: [
     HttpModule,
@@ -185,7 +187,8 @@ export function provideConfig() {
     JwtHelperService,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent, RegisterComponent, ProductActionComponent, CategoryActionComponent]
+  entryComponents: [LoginComponent,RegisterComponent,ProductActionComponent, CategoryActionComponent, ConfirmOrderComponent]
+
 
 })
 export class AppModule { }

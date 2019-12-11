@@ -1,0 +1,22 @@
+<mat-toolbar style="display: flex; justify-content: space-between;">
+      
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="close()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="confirmOrderForm">
+  <div class="example-container">
+    <h2 style="font-weight: 100; text-align: center;">CONFIRM YOUR ORDER</h2>
+    <h4 style="font-weight: 100; text-align: center;">Order Information</h4>
+    <mat-list>
+      <mat-list-item><h4>Date Created:</h4> <h4 style="margin-left: 80px;">{{createdDate}}</h4></mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item><h4>Receiver Name:</h4> <h4 style="margin-left: 60px;">{{checkout.name}}</h4> </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item style="display: flex; text-align: center;"><h4>Total Cost:</h4> <h4 style="margin-left: 100px;">{{checkout.total}}      VNĐ</h4></mat-list-item>
+      
+    </mat-list>
+
+    <button mat-button mat-raised-button color="primary" class="buy-now-button space" (click)="confirmOrder()">Confirm your order !
+    </button>
+  </div>
+</form>

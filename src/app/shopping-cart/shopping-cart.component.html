@@ -40,9 +40,10 @@
                     {{item.price}}
             </div>
             <div class="quantity">
-                <mat-icon fontSet="material-icons-outlined" (click)="asdas" class="close-icon">remove</mat-icon>
+                <mat-icon fontSet="material-icons-outlined" (click)="aaa" class="close-icon">remove</mat-icon>
                 <input style="height: 20px; margin-right: 5px; text-align: center;" type="text" size="1" value="{{item.quantity}}" />
-                <mat-icon fontSet="material-icons-outlined" (click)="xczxc" class="close-icon">add</mat-icon>
+                <mat-icon fontSet="material-icons-outlined" (click)="bbb" class="close-icon">add</mat-icon>
+
             </div>
             <div class="total">
                     {{item.quantity*item.price}}
@@ -68,7 +69,7 @@
                 </tr>
             </table>
             <div class="checkout-button">
-                <button mat-stroked-button color="primary" class="button full-button">PROCEED TO CHECKOUT</button>
+                <button mat-stroked-button color="primary" class="button full-button" (click)="openConfirmOrderDialog()">PROCEED TO CHECKOUT</button>
             </div>
         </div>
     
