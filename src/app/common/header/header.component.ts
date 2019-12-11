@@ -1,11 +1,12 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../../login/login.component';
-import {RegisterComponent} from '../../register/register.component';
+import { RegisterComponent } from '../../register/register.component';
 import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-
+import { AuthService, SocialUser } from 'angularx-social-login';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthenticateService } from '../../services/authenticate.service';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,10 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  user: SocialUser;
+  loggedIn: boolean;
+  flag = 0;
 
   loadingEnable: boolean;
   sidenavEnable = false;
@@ -24,15 +29,33 @@ export class HeaderComponent implements OnInit {
   toggelSidenav() {
     this.sidenav.emit('toggel');
   }
-  constructor(public dialog: MatDialog, private router: Router) { }
+  constructor(public dialog: MatDialog,
+    private authService: AuthService,
+    private cookieService: CookieService,
+    private authenticateService: AuthenticateService,
+    private router: Router) { }
 
   ngOnInit() {
+    this.authService.authState.subscribe(async (user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+
+      console.log(this.authenticateService.flagCookie)
+      if (this.cookieService.get('token') || this.authenticateService.flagCookie == true) {
+
+        this.flag = 1;
+      } else {
+        this.flag = 0;
+      }
+      console.log(this.user);
+    });
+
   }
   enableSidenav() {
     this.sidenavEnable = !this.sidenavEnable;
   }
   openLoginDialog(): void {
-    const dialogRef = this.dialog.open(LoginComponent ,{
+    const dialogRef = this.dialog.open(LoginComponent, {
 
     });
 
@@ -41,7 +64,7 @@ export class HeaderComponent implements OnInit {
     });
   }
   openRegisterDialog(): void {
-    const dialogRef = this.dialog.open(RegisterComponent ,{
+    const dialogRef = this.dialog.open(RegisterComponent, {
 
     });
 
@@ -50,8 +73,8 @@ export class HeaderComponent implements OnInit {
     });
   }
   logout() {
-    
+    this.authenticateService.logout();
+    console.log('Logged Out');
     this.router.navigate(['home']);
   }
-
 }

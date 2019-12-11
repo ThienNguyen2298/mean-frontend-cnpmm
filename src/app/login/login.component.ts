@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticateService } from 'src/app/services/authenticate.service';
-import { HttpClient } from '@angular/common/http';
+import { AbstractControl, FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthenticateService } from '../../app/services/authenticate.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -11,29 +10,35 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<LoginComponent>,
-    @Inject(MAT_DIALOG_DATA)
-    public data: any,
-    private fb: FormBuilder,
-    private router: Router,
-    private authenticateServiceService: AuthenticateService,
-    private http: HttpClient
-  ) { }
+  loggedIn: boolean;
+
+  loginForm: FormGroup;
+  constructor(private router: Router,
+    private authenticateService: AuthenticateService,
+    private _router: Router,
+    private cookieService: CookieService) {
+
+    this.loginForm = new FormGroup({
+      username: new FormControl(null, Validators.required),
+      password: new FormControl(null, Validators.required)
+    });
+
+  }
+
+
+  loginFacebook() {
+    // this.authenticateService.signInWithFB().then(() => {
+    //   this.router.navigate(['adminProduct']);
+    // });
+
+    this.authenticateService.signInWithFB();
+  }
+
+  loginGoogle() {
+    this.authenticateService.signInWithGoogle();
+  }
 
   ngOnInit() {
-    this.loginForm = this.fb.group({
-      username: [''],
-      password: ['']
-    });
-  }
-
-  loginFacebook(token: any) {
-    return this.authenticateServiceService.loginFacebook();
-  }
-
-  loginGoogle(token: any) {
-    return this.authenticateServiceService.loginGoogle();
   }
 }
