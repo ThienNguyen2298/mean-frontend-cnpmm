@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/product.model';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import * as _ from 'lodash';
@@ -34,14 +34,14 @@ export class ProductService {
     });
   }
   constructor(private http: HttpClient, private categoryService: CategoryService) { }
-  getProducts(){
+  getProducts() {
     return this.http.get(`${this.url}/products`);
   }
   getProductById(id) {
     console.log("ID single", id);
-    return this.http.get(this.url+'/products/'+id);
+    return this.http.get(this.url + '/products/' + id);
   }
-  addProduct(p){
+  addProduct(p) {
     const product = {
       name: p.name,
       price: p.price,
@@ -51,12 +51,12 @@ export class ProductService {
       image: p.image,
       categoryId: p.category
     }
-    console.log("product add service",JSON.stringify(p));
-    
-    
-    return this.http.post(this.url + "/products",product);
+    console.log("product add service", JSON.stringify(p));
+
+
+    return this.http.post(this.url + "/products", product);
   }
-  updateProduct(p, id){
+  updateProduct(p, id) {
     const product = {
       name: p.name,
       price: p.price,
@@ -68,11 +68,11 @@ export class ProductService {
     }
     console.log("ID service", id);
     console.log("Product update service", product);
-    return this.http.put(this.url+'/products'+'/'+id, product);
+    return this.http.put(this.url + '/products' + '/' + id, product);
   }
-  deleteProduct(id){
+  deleteProduct(id) {
     console.log("ID service", id);
-    return this.http.delete(this.url+'/products/'+id);
+    return this.http.delete(this.url + '/products/' + id);
   }
   populateForm(product) {
     this.form.setValue(product);
