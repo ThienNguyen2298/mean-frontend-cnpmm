@@ -31,7 +31,6 @@
         </div>
         <div class="menu">
             <ul class="list">
-
                 <li class="contain" *ngIf="isLoggedIn() == false">
                     <span [routerLink]="['/manage']">MANAGER</span>
                 </li>
@@ -40,6 +39,7 @@
                     <span>LOGIN</span>
                 </li>
                 <li class="contain" *ngIf="isLoggedIn() == false" (click)="openRegisterDialog()">
+
                     <span>REGISTER</span>
                 </li>
                 <li class="contain" [routerLink]="['/shopping-cart']">
@@ -62,6 +62,7 @@
         </div>
 
         <!-- <div class="cart-icon mobile-view" *ngIf="!user">
+
 
             <button mat-stroked-button color="primary" class="button" (click)="openLoginDialog()">LOGIN</button>
         </div>

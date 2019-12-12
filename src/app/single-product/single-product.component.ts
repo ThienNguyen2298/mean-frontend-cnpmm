@@ -85,7 +85,7 @@ cart= <any>[];
     
   }
   InitCart(){
-    if (window.localStorage)
+    if (window.localStorage.getItem('carts'))
         this.cart = JSON.parse(window.localStorage.getItem("carts"));
     if (!this.cart)
         this.cart = [];

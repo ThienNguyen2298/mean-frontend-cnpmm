@@ -64,7 +64,7 @@ export class ConfirmOrderComponent implements OnInit {
     this.confirmOrderForm = new FormGroup({
       total: new FormControl(this.checkout.total),
       createdDate: new FormControl(this.createdDate),
-      name: new FormControl(this.checkout.name.name)
+      name: new FormControl(this.checkout.name)
     });
     console.log(this.confirmOrderForm);
   }
