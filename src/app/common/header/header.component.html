@@ -32,14 +32,14 @@
         <div class="menu">
             <ul class="list">
 
-                <li class="contain" *ngIf="!user">
+                <li class="contain" *ngIf="((user!=null && userToken!=null)|| admin==compareAdmin)">
                     <span [routerLink]="['/manage']">MANAGER</span>
                 </li>
 
-                <li class="contain" *ngIf="!user" (click)="openLoginDialog()">
+                <li class="contain" *ngIf="(user==null && userToken==null)" (click)="openLoginDialog()">
                     <span>LOGIN</span>
                 </li>
-                <li class="contain" *ngIf="!user" (click)="openRegisterDialog()">
+                <li class="contain" *ngIf="(user==null && userToken==null)" (click)="openRegisterDialog()">
                     <span>REGISTER</span>
                 </li>
                 <li class="contain" [routerLink]="['/shopping-cart']">
@@ -54,14 +54,22 @@
                         <a (click)="logout()">Logout</a>
                     </div>
                 </li>
-                <li class="contain" *ngIf="user" [routerLink]="['/shopping-cart']">
-                    <mat-icon fontSet="material-icons-outlined">add_shopping_cart</mat-icon>
+                <li class="contain profile dropdown" *ngIf="userToken">
+                    <p>{{userToken.name}}</p>
+
+                    <div class="dropdown-content">
+                        <a [routerLink]="['/myprofile']">My Profile</a>
+                        
+                        <a (click)="logout()">Logout</a>
+                    </div>
                 </li>
+                
+               
                 
             </ul>
         </div>
 
-        <div class="cart-icon mobile-view" *ngIf="!user">
+        <div class="cart-icon mobile-view" *ngIf="!user && !userToken">
 
             <button mat-stroked-button color="primary" class="button" (click)="openLoginDialog()">LOGIN</button>
         </div>

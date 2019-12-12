@@ -71,9 +71,12 @@ export class AuthenticateService {
       })
     })
   }
-
+  signIn(){
+    
+  }
   logout() {
     localStorage.removeItem('id_token');
+    localStorage.removeItem('token');
     return this.httpClient.get(`http://localhost:8001/auth/logout`);
   }
 
@@ -81,5 +84,18 @@ export class AuthenticateService {
     var token = localStorage.getItem("id_token");
     if (token) return true;
     return false;
+  }
+  login(up: any){
+    const userpass = {
+      username: up.username,
+      password: up.password
+    }
+    return this.httpClient.post(this.url + "/user/login",userpass);
+  }
+  setToken(token: string){
+    localStorage.setItem("token",token);
+  }
+  deleteToken(){
+    localStorage.removeItem("token");
   }
 }
