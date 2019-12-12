@@ -27,7 +27,9 @@ export class LoginComponent implements OnInit {
     });
 
   }
-
+  login(){
+    this.dialogRef.close(this.loginForm.value);
+  }
 
   loginFacebook() {
     // this.authenticateService.signInWithFB().then(() => {
