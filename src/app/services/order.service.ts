@@ -11,10 +11,11 @@ export class OrderService {
   constructor(
     private http: HttpClient) { }
 
-  saveOrder(user, total) {
+  saveOrder(user, total, email) {
     const bill = {
       userOrder: user,
-      totalCost: total
+      totalCost: total,
+      userEmail: email,
     }
     return this.http.post(this.url + "/bills", bill).subscribe(response => {
 

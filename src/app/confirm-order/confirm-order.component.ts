@@ -78,7 +78,7 @@ export class ConfirmOrderComponent implements OnInit {
       listItem: this.checkout.listItem,
     }
     this.dialogRef.close(data);
-    this.orderService.saveOrder(this.user.id, data.total);
+    this.orderService.saveOrder(this.user.id, data.total, this.user.email);
   }
   close() {
     this.dialogRef.close(null);
