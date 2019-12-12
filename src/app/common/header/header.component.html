@@ -31,21 +31,21 @@
         </div>
         <div class="menu">
             <ul class="list">
-
-                <li class="contain" *ngIf="((user!=null && userToken!=null)|| admin==compareAdmin)">
+                <li class="contain" *ngIf="isLoggedIn() == false">
                     <span [routerLink]="['/manage']">MANAGER</span>
                 </li>
 
-                <li class="contain" *ngIf="(user==null && userToken==null)" (click)="openLoginDialog()">
+                <li class="contain" *ngIf="isLoggedIn() == false" (click)="openLoginDialog()">
                     <span>LOGIN</span>
                 </li>
-                <li class="contain" *ngIf="(user==null && userToken==null)" (click)="openRegisterDialog()">
+                <li class="contain" *ngIf="isLoggedIn() == false" (click)="openRegisterDialog()">
+
                     <span>REGISTER</span>
                 </li>
                 <li class="contain" [routerLink]="['/shopping-cart']">
                     <mat-icon fontSet="material-icons-outlined">add_shopping_cart</mat-icon>
                 </li>
-                <li class="contain profile dropdown" *ngIf="user">
+                <li class="contain profile dropdown" *ngIf="isLoggedIn() == true">
                     <p>{{user.name}}</p>
 
                     <div class="dropdown-content">
@@ -54,22 +54,15 @@
                         <a (click)="logout()">Logout</a>
                     </div>
                 </li>
-                <li class="contain profile dropdown" *ngIf="userToken">
-                    <p>{{userToken.name}}</p>
-
-                    <div class="dropdown-content">
-                        <a [routerLink]="['/myprofile']">My Profile</a>
-                        
-                        <a (click)="logout()">Logout</a>
-                    </div>
+                <!-- <li class="contain" *ngIf="isLoggedIn() == true" [routerLink]="['/shopping-cart']">
+                    <mat-icon fontSet="material-icons-outlined">add_shopping_cart</mat-icon>
                 </li>
-                
-               
-                
+                 -->
             </ul>
         </div>
 
-        <div class="cart-icon mobile-view" *ngIf="!user && !userToken">
+        <!-- <div class="cart-icon mobile-view" *ngIf="!user">
+
 
             <button mat-stroked-button color="primary" class="button" (click)="openLoginDialog()">LOGIN</button>
         </div>
@@ -80,7 +73,7 @@
             <a [routerLink]="['/shopping-cart']">
                 <mat-icon fontSet="material-icons-outlined">add_shopping_cart</mat-icon>
             </a>
-        </div>
+        </div> -->
 
 
     </div>

@@ -33,7 +33,8 @@ export class AuthenticateService {
               var token = socialUser.authToken;
               if (token) {
                 localStorage.setItem('id_token', token);
-                this.cookieService.set('token', token, 120 / (3600 * 24)); // 2p
+                this.cookieService.set('token', token, 10 / (3600 * 24)); // 2p
+                // this.cookieService.set('token', token, 120 / (3600 * 24)); // 2p
                 this.flagCookie = true;
                 console.log(this.flagCookie)
                 console.log(token);
@@ -59,7 +60,8 @@ export class AuthenticateService {
               var token = socialUser.authToken;
               if (token) {
                 localStorage.setItem('id_token', token);
-                this.cookieService.set('token', token, 120 / (3600 * 24));
+                this.cookieService.set('token', token, 10 / (3600 * 24));
+                // this.cookieService.set('token', token, 120 / (3600 * 24)); // 2p
                 console.log(token);
               }
               resolve(response.json());

@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
     this.authService.authState.subscribe(async (user) => {
       this.user = user;
       this.loggedIn = (user != null);
-      console.log("user: ",this.user);
+      console.log("user: ", this.user);
 
       console.log(this.authenticateService.flagCookie)
       if (this.cookieService.get('token') || this.authenticateService.flagCookie == true) {
@@ -88,14 +88,15 @@ export class HeaderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("kq", result);
-      if(result == 1){
+      if (result == 1) {
         console.log("Đã vô fb")
         this.authenticateService.signInWithFB();
       }
-      else if( result == 2){
+      else if (result == 2) {
         this.authenticateService.signInWithGoogle();
       }
       else {
+
         console.log("login chay", result);
         this.authenticateService.login(result).subscribe((res: any)=>{
           console.log(res)
@@ -107,6 +108,7 @@ export class HeaderComponent implements OnInit {
           console.log("user token: ", this.userToken.userType);
           console.log('user social', this.user);
         })
+
       }
     });
   }
@@ -127,11 +129,24 @@ export class HeaderComponent implements OnInit {
     }
     
 
-   
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log('The dialog was closed');
+
+    });
+
   }
   logout() {
     this.authenticateService.logout();
     console.log('Logged Out');
     this.router.navigate(['/home']);
+  }
+
+
+  isLoggedIn() {
+    var token = localStorage.getItem("id_token");
+    if (token && this.cookieService.get('token')) return true;
+    return false;
   }
 }
