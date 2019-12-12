@@ -127,20 +127,13 @@ export class HeaderComponent implements OnInit {
         })
       });
     }
-    
-
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      //console.log('The dialog was closed');
-
-    });
-
+  
   }
   logout() {
     this.authenticateService.logout();
     console.log('Logged Out');
-    this.router.navigate(['/home']);
+    //this.router.navigate(['/home']);
+    window.location.href='http://localhost:4200/home';
   }
 
 

@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 
 import { ActivatedRoute } from "@angular/router";
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-confirm-order',
@@ -78,7 +79,24 @@ export class ConfirmOrderComponent implements OnInit {
       listItem: this.checkout.listItem,
     }
     this.dialogRef.close(data);
-    this.orderService.saveOrder(this.user.id, data.total);
+    this.orderService.saveOrder(this.user.id, data.total).subscribe((res: any) => {
+      console.log("id bill tra ve", res.bill);
+      console.log('danh scah sp mua', this.checkout.listItem);
+      for(var i in this.checkout.listItem){
+        if(this.checkout.listItem[i] != null)
+        {
+          var dt = {
+            quantity: this.checkout.listItem[i].quantity,
+            productId: this.checkout.listItem[i].id,
+            billId: res.bill._id
+          }
+          console.log("dt", dt);
+          this.orderService.saveOrderDetail(dt);
+        }
+        
+      }
+    })
+
   }
   close() {
     this.dialogRef.close(null);

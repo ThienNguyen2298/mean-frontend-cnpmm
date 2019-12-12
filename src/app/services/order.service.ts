@@ -16,14 +16,22 @@ export class OrderService {
       userOrder: user,
       totalCost: total
     }
-    return this.http.post(this.url + "/bills", bill).subscribe(response => {
-
-    });
+    return this.http.post(this.url + "/bills", bill);
   }
 
   confirmOrder(id) {
     return this.http.get(this.url + '/bills/confirm-order/' + id).subscribe((data) => {
       console.log('Hahaha', data);
+    });
+  }
+  saveOrderDetail(dt: any){
+    const detail = {
+      quantity: dt.quantity,
+      billId: dt.billId,
+      productId: dt.productId
+    }
+    return this.http.post(this.url+'/bills/billdetail',detail).subscribe((data: any)=>{
+      console.log(data.billdetail);
     });
   }
 }
