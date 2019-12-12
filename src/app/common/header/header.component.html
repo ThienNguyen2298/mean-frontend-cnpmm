@@ -31,14 +31,14 @@
         </div>
         <div class="menu">
             <ul class="list">
-                <li class="contain" *ngIf="isLoggedIn() == false">
+                <li class="contain" *ngIf="((user!=null && userToken!=null)|| admin==compareAdmin)">
                     <span [routerLink]="['/manage']">MANAGER</span>
                 </li>
 
-                <li class="contain" *ngIf="isLoggedIn() == false" (click)="openLoginDialog()">
+                <li class="contain" *ngIf="(isLoggedIn() == false && userToken==null)" (click)="openLoginDialog()">
                     <span>LOGIN</span>
                 </li>
-                <li class="contain" *ngIf="isLoggedIn() == false" (click)="openRegisterDialog()">
+                <li class="contain" *ngIf="(isLoggedIn() == false && userToken==null)" (click)="openRegisterDialog()">
 
                     <span>REGISTER</span>
                 </li>
@@ -50,7 +50,16 @@
 
                     <div class="dropdown-content">
                         <a [routerLink]="['/myprofile']">My Profile</a>
-                        
+
+                        <a (click)="logout()">Logout</a>
+                    </div>
+                </li>
+                <li class="contain profile dropdown" *ngIf="userToken">
+                    <p>{{userToken.name}}</p>
+
+                    <div class="dropdown-content">
+                        <a [routerLink]="['/myprofile']">My Profile</a>
+
                         <a (click)="logout()">Logout</a>
                     </div>
                 </li>

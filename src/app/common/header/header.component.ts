@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 import { AuthService, SocialUser } from 'angularx-social-login';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthenticateService } from '../../services/authenticate.service';
-import { FormGroup,  Validators, FormBuilder } from "@angular/forms";
-import {RegisterService} from '../../services/register.service';
-import {NotificationService} from '../../services/notification.service';
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { RegisterService } from '../../services/register.service';
+import { NotificationService } from '../../services/notification.service';
 import { from } from 'rxjs';
 
 @Component({
@@ -38,14 +38,14 @@ export class HeaderComponent implements OnInit {
   toggelSidenav() {
     this.sidenav.emit('toggel');
   }
-  constructor(public dialog: MatDialog,private formBuilder: FormBuilder, private registerService:RegisterService,
-    private notificationService :NotificationService,
+  constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private registerService: RegisterService,
+    private notificationService: NotificationService,
     private authService: AuthService,
     private cookieService: CookieService,
     private authenticateService: AuthenticateService,
     private router: Router) {
-    
-     }
+
+  }
 
   ngOnInit() {
     this.buildRegisterForm();
@@ -64,19 +64,19 @@ export class HeaderComponent implements OnInit {
       console.log(this.user);
     });
     this.admin = '5df13f1c1c9d4400006fe348';
-    
+
   }
   enableSidenav() {
     this.sidenavEnable = !this.sidenavEnable;
   }
   //init register form
-  buildRegisterForm(){
+  buildRegisterForm() {
     this.registerForm = this.formBuilder.group({
       'name': ['', Validators.required],
       'email': ['', Validators.required],
       'phoneNumber': ['', Validators.required],
       'username': ['', Validators.required],
-      'password': ['',Validators.required],
+      'password': ['', Validators.required],
       'repassword': ['', Validators.required]
     });
   }
@@ -98,7 +98,7 @@ export class HeaderComponent implements OnInit {
       else {
 
         console.log("login chay", result);
-        this.authenticateService.login(result).subscribe((res: any)=>{
+        this.authenticateService.login(result).subscribe((res: any) => {
           console.log(res)
           this.authenticateService.setToken(res.token);
           var token = localStorage.getItem('token');
@@ -114,7 +114,7 @@ export class HeaderComponent implements OnInit {
   }
   //register
   openRegisterDialog(): void {
-    if(this.user == null){
+    if (this.user == null) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
@@ -127,20 +127,13 @@ export class HeaderComponent implements OnInit {
         })
       });
     }
-    
 
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      //console.log('The dialog was closed');
-
-    });
 
   }
   logout() {
     this.authenticateService.logout();
     console.log('Logged Out');
-    this.router.navigate(['/home']);
+    window.location.href='http://localhost:4200/home';
   }
 
 
